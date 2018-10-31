@@ -1,0 +1,1 @@
+This is a C++11-wrapper for dynamic loading of .dll-files using brutal C-style WinAPI functions like LoadLibraryA and GetProcAddress.
