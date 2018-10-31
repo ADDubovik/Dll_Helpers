@@ -1,0 +1,16 @@
+*.db
+*.opendb
+*.user
+*.obj
+*.pdb
+*.suo
+*.sdf
+*.origin
+.build*
+ipch
+Debug
+Release
+.~lock.*
+*.spec
+.vs
+3rdparty
