@@ -7,3 +7,5 @@ set(SRC
 )
 
 add_library(${PROJECT_NAME} SHARED ${SRC})
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "DllHelpers/${PROJECT_NAME}")

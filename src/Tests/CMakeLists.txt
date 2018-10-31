@@ -6,6 +6,7 @@ set(GTest_ADD_TO_SRC  ${GTest_DIR}/googletest/src/gtest-all.cc)
 
 include_directories(
 	${GTest_INCLUDE_DIR}
+	${GTest_INCLUDE_DIR}/..
 	../Helpers/
 	)
 
