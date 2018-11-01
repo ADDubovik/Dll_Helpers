@@ -59,7 +59,7 @@ namespace DllHelpers
 	{
 		private:
 			const Library &m_lib;
-			//using Fn = ReturnType (__stdcall *)(Args ...);
+			// Type depending on calling convention
 			using Fn = typename Implementation::FnTypeProvider<convention, ReturnType, Args ...>::Fn;
 			Fn m_func = NULL;
 		public:
