@@ -23,4 +23,4 @@ endmacro()
 add_definitions(-DGTEST_LANG_CXX11 -DBRAND_NAME=\"Tests\")
 
 
-DLL_HELPERS_TEST(DllTest Test/Test.cpp)
+DLL_HELPERS_TEST(DllTest Test/Test.cpp ../Helpers/DllHelpers.h)
