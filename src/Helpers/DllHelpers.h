@@ -38,8 +38,6 @@ namespace DllHelpers
 	{
 		template<CallingConventions convention, typename ReturnType, typename ... Args> struct FnTypeProvider
 		{
-			// Forward declaration.
-			class Fn;
 		};
 
 		template<typename ReturnType, typename ... Args> struct FnTypeProvider<CallingConventions::__cdecl__, ReturnType, Args ...>
@@ -62,7 +60,7 @@ namespace DllHelpers
 		private:
 			const Library &m_lib;
 			//using Fn = ReturnType (__stdcall *)(Args ...);
-			using Fn = FnTypeProvider<convention, ReturnType, Args ...>::Fn;
+			using Fn = typename Implementation::FnTypeProvider<convention, ReturnType, Args ...>::Fn;
 			Fn m_func = NULL;
 		public:
 			Function(const Library &lib, const std::string &name) : m_lib(lib)
