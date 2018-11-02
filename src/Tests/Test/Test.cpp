@@ -53,6 +53,37 @@ TEST(DllTest, FunctionSuccessTest01)
 }
 
 
+TEST(DllTest, FunctionSuccessTest02)
+{
+		try
+		{
+			DllHelpers::Library lib("TestDll.dll");
+			DllHelpers::Function<DllHelpers::__cdecl__, void, char*, char*, char*>   char_mix_cdecl   (lib, "char_mix_cdecl");
+			DllHelpers::Function<DllHelpers::__stdcall__, void, char*, char*, char*> char_mix_stdcall (lib, "char_mix_stdcall");
+
+			char in1[11] = "0123456789";
+			char in2[11] = "abcdefghjk";
+
+				{
+					char out[21];
+					char_mix_cdecl(in1, in2, out);
+					EXPECT_EQ(std::string("0a1b2c3d4e5f6g7h8j9k"), out);
+				}
+
+				{
+					char out[21];
+					char_mix_stdcall(in1, in2, out);
+					EXPECT_EQ(std::string("0a1b2c3d4e5f6g7h8j9k"), out);
+				}
+		}
+		catch (std::exception)
+		{
+			// Should not execute this
+			EXPECT_TRUE(false);
+		}
+}
+
+
 TEST(DllTest, FunctionUnsuccessTest01)
 {
 		try

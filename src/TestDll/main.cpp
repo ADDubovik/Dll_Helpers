@@ -19,6 +19,33 @@ PREFIX double __cdecl sum_cdecl(const double a, const double b)
 }
 
 
+void char_mix(const char *in1, const char *in2, char *out)
+{
+	size_t j = 0;
+		for ( size_t i = 0; (in1[i] && in2[i]); ++i)
+		{
+			out[j++] = in1[i];
+			out[j++] = in2[i];
+		}
+	out[j] = '\0';
+}
+
+
+// out should be double size
+PREFIX void __stdcall char_mix_stdcall(const char *in1, const char *in2, char *out)
+{
+#pragma EXPORT
+	char_mix(in1, in2, out);
+}
+
+
+// out should be double size
+PREFIX void __cdecl char_mix_cdecl(const char *in1, const char *in2, char *out)
+{
+	char_mix(in1, in2, out);
+}
+
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 		switch (ul_reason_for_call)
