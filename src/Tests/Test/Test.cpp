@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <windows.h>
 
 #include "DllHelpers.h"
 
@@ -116,6 +117,27 @@ TEST(DllTest, FunctionUnsuccessTest02)
 			// Should execute this
 			EXPECT_TRUE(true);
 			EXPECT_EQ(std::string(e.what()), "Can't get proc address for sum_jsdgtiwesufd");
+		}
+}
+
+
+TEST(DllHelpersTest, WinAPITest01)
+{
+		// "GetComputerNameA" from kernel32.dll invocation
+		try
+		{
+			DllHelpers::Library lib("kernel32.dll");
+			DllHelpers::Function<DllHelpers::__stdcall__, BOOL, LPSTR, LPDWORD> computerName(lib, "GetComputerNameA");
+
+			DWORD length = MAX_COMPUTERNAME_LENGTH + 1;
+			char name[MAX_COMPUTERNAME_LENGTH + 1];
+			BOOL result = computerName((LPSTR)&name[0], (LPDWORD)&length);
+
+			std::cout << std::endl << "Your computer's name is: " << std::string(name) << std::endl << std::endl;
+		}
+		catch(...)
+		{
+			EXPECT_TRUE(false);
 		}
 }
 
