@@ -26,6 +26,11 @@ namespace DllHelpers
 					if ( !(m_handle = LoadLibraryA(name.c_str())) )
 						throw std::runtime_error( std::string("Can't load library ") + name );
 			}
+			Library(const std::wstring &name)
+			{
+					if ( !(m_handle = LoadLibraryW(name.c_str())) )
+						throw std::runtime_error( std::string("Can't load library ") + std::string(name.begin(), name.end()) );
+			}
 			~Library()
 			{
 					if ( m_handle )

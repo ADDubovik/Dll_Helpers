@@ -35,6 +35,37 @@ TEST(DllTest, LibraryUnsuccessLoadTest)
 }
 
 
+TEST(DllTest, LibraryUnicodeSuccessLoadTest)
+{
+		try
+		{
+			DllHelpers::Library lib(L"TestDll.dll");
+		}
+		catch (std::exception)
+		{
+			// Should not execute this
+			EXPECT_TRUE(false);
+		}
+}
+
+
+TEST(DllTest, LibraryUnicodeUnsuccessLoadTest)
+{
+		try
+		{
+			DllHelpers::Library lib(L"sjhggkjytrjqweoirtenslakjfkgrehjksfakldjhfgkrkdhgkdfsfaewfsvklrhskdjf.dll");
+			// Should not execute this because of exception
+			EXPECT_TRUE(false);
+		}
+		catch (std::exception &e)
+		{
+			// Should execute this
+			EXPECT_TRUE(true);
+			EXPECT_EQ(std::string(e.what()), "Can't load library sjhggkjytrjqweoirtenslakjfkgrehjksfakldjhfgkrkdhgkdfsfaewfsvklrhskdjf.dll");
+		}
+}
+
+
 TEST(DllTest, FunctionSuccessTest01)
 {
 		try
