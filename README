@@ -1,1 +1,34 @@
-This is a C++11-wrapper for dynamic loading of .dll-files using brutal C-style WinAPI functions like LoadLibraryA and GetProcAddress.
+This is a C++11-wrapper for dynamic loading of .dll-files. It allows to avoid using of brutal C-style WinAPI functions like LoadLibraryA and GetProcAddress.
+
+
+USAGE EXAMPLE
+
+try
+{
+	DllHelpers::Library lib("kernel32.dll");
+	DllHelpers::Function<DllHelpers::__stdcall__, BOOL, LPSTR, LPDWORD> computerName(lib, "GetComputerNameA");
+
+	DWORD length = MAX_COMPUTERNAME_LENGTH + 1;
+	char name[MAX_COMPUTERNAME_LENGTH + 1];
+	BOOL result = computerName((LPSTR)&name[0], (LPDWORD)&length);
+
+	std::cout << std::endl << "Your computer's name is: " << std::string(name) << std::endl << std::endl;
+}
+catch(std::exception &e)
+{
+	std::cout << e.what();
+}
+
+
+
+
+HOW TO USE
+
+To use it in your C++11-code, you just need #include DllHelpers.h.
+
+If you want to dive deeper (modify or test the wrapper), you need:
+- clone GoogleTest to the "3rdparty" folder (or simply run get_GTest.cmd);
+- download and install CMake;
+- create a project for your compiler using CMake.
+It's tested under MS Windows + MSVC2017.
+
