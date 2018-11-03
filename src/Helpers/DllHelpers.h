@@ -14,6 +14,7 @@ namespace DllHelpers
 	
 
 	// RAII for .dll handle
+	// Noncopyable
 	class Library
 	{
 		private:
@@ -32,6 +33,10 @@ namespace DllHelpers
 					if ( !(m_handle = LoadLibraryW(name.c_str())) )
 						throw std::runtime_error( std::string("Can't load library ") + std::string(name.begin(), name.end()) );
 			}
+
+			Library(const Library&) = delete;
+			Library& operator=(const Library&) = delete;
+
 			~Library()
 			{
 					if ( m_handle )
