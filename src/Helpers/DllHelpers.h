@@ -24,7 +24,7 @@ namespace DllHelpers
 			// Constructs the Library from the ANSI-string representing the .dll-file name
 			Library(const std::string &name)
 			{
-					if ( !(m_handle = LoadLibraryA(name.c_str())) )
+					if ( (m_handle = LoadLibraryA(name.c_str())) == nullptr )
 						throw std::runtime_error( std::string("Can't load library ") + name );
 			}
 			// Constructs the Library from the UNICODE-string representing the .dll-file name
@@ -77,7 +77,7 @@ namespace DllHelpers
 			// Constructs the Function from the Library instance and the function name
 			Function(const Library &lib, const std::string &name) : m_lib(lib)
 			{
-					if ( !(m_func = (Fn)GetProcAddress(m_lib.m_handle, name.c_str())) )
+					if ( (m_func = (Fn)GetProcAddress(m_lib.m_handle, name.c_str())) == nullptr )
 						throw std::runtime_error( std::string("Can't get proc address for ") + name );
 			}
 			~Function() {}
