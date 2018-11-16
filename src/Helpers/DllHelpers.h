@@ -30,7 +30,7 @@ namespace DllHelpers
 			// Constructs the Library from the UNICODE-string representing the .dll-file name
 			Library(const std::wstring &name)
 			{
-					if ( !(m_handle = LoadLibraryW(name.c_str())) )
+					if ( (m_handle = LoadLibraryW(name.c_str())) == nullptr )
 						throw std::runtime_error( std::string("Can't load library ") + std::string(name.begin(), name.end()) );
 			}
 
